@@ -1,6 +1,7 @@
 package com.xiliang.controller.admin;
 
 import com.xiliang.constant.JwtClaimsConstant;
+import com.xiliang.dto.EmployeeDTO;
 import com.xiliang.dto.EmployeeLoginDTO;
 import com.xiliang.entity.Employee;
 import com.xiliang.properties.Jwtproperties;
@@ -30,7 +31,9 @@ public class EmployeeController {
     private EmployeeService employeeService;
     @Autowired
     private Jwtproperties jwtproperties;
-
+    /*
+    * 员工登录
+    * */
     @PostMapping("/login")
     @ApiOperation("员工登录")
     public Result<EmployeeLoginVO> employeeLogin(@RequestBody EmployeeLoginDTO employeeLoginDTO) {
@@ -54,6 +57,21 @@ public class EmployeeController {
 
         return Result.success(employeeLoginVO);
     }
+    //退出登录
+    @PostMapping("/logout")
+    @ApiOperation("员工退出")
+    public Result<String> employeeLogout() {
+        return Result.success();
+    }
+    //新增员工
+    @PostMapping
+    @ApiOperation("新增员工")
+    public Result employeeSave(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("新增员工,{}", employeeDTO);
+        employeeService.employeeSave(employeeDTO);
+        return Result.success();
+    }
+
 
 
 

@@ -1,7 +1,10 @@
 package com.xiliang.service.impl;
 
 import com.xiliang.constant.MessageConstant;
+import com.xiliang.constant.PasswordConstant;
 import com.xiliang.constant.StatusConstant;
+import com.xiliang.context.BaseContext;
+import com.xiliang.dto.EmployeeDTO;
 import com.xiliang.dto.EmployeeLoginDTO;
 import com.xiliang.entity.Employee;
 import com.xiliang.exception.AccountLockedException;
@@ -10,9 +13,12 @@ import com.xiliang.exception.PasswordErrorException;
 import com.xiliang.mapper.EmployeeMapper;
 import com.xiliang.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 @Slf4j
@@ -49,5 +55,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         //3、返回实体对象
         return employee;
+    }
+    //新增员工
+
+    public void employeeSave(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        //设置员工默认状态
+        employee.setStatus(StatusConstant.ENABLE);
+        //设置默认密码为123456
+        employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+        //设置创建时间和修改时间
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setUpdateTime(LocalDateTime.now());
+        //设置当前记录人的id和修改人的id
+        employee.setCreateUser(BaseContext.getCurrentId());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        //插入数据
+        employeeMapper.insert(employee);
+
+
+
     }
 }

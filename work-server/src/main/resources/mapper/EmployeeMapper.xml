@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiliang.mapper.EmployeeMapper">
+
+
+    <insert id="insert">
+        insert into workhouse_managementshu.employee (id, username, name, password, phone, sex, id_number, status, create_time, update_time, create_user, update_user)
+        values (#{id}, #{username}, #{name}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}, #{createTime}, #{updateTime}, #{createUser}, #{updateUser})
+    </insert>
+</mapper>
