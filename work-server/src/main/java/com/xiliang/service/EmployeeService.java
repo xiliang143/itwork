@@ -9,4 +9,6 @@ public interface EmployeeService {
  Employee employeeLogin(EmployeeLoginDTO employeeLoginDTO);
 //新增员工
  void employeeSave(EmployeeDTO employeeDTO);
+//删除员工
+ void employeeDelete(Long id);
 }

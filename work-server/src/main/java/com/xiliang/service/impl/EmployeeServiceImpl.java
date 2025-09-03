@@ -74,7 +74,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         //插入数据
         employeeMapper.insert(employee);
 
+    }
 
-
+    //删除员工
+    public void employeeDelete(Long id) {
+        employeeMapper.deleteById(id);
     }
 }
