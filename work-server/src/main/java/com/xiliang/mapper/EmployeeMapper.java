@@ -3,10 +3,7 @@ package com.xiliang.mapper;
 import com.xiliang.dto.EmployeeDTO;
 import com.xiliang.dto.EmployeeLoginDTO;
 import com.xiliang.entity.Employee;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface EmployeeMapper {
@@ -17,4 +14,6 @@ public interface EmployeeMapper {
     void insert(Employee employee);
    @Delete("delete from workhouse_managementshu.employee where id = #{id}")
     void deleteById(Long id);
+    //编辑员工信息
+    void update(Employee employee);
 }

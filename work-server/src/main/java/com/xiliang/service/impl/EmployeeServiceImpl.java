@@ -80,4 +80,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void employeeDelete(Long id) {
         employeeMapper.deleteById(id);
     }
+    //编辑员工信息
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        //对象属性拷贝,把employeeDTO中的属性拷贝到employee中
+        BeanUtils.copyProperties(employeeDTO, employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
 }

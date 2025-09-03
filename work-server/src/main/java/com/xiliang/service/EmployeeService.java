@@ -11,4 +11,6 @@ public interface EmployeeService {
  void employeeSave(EmployeeDTO employeeDTO);
 //删除员工
  void employeeDelete(Long id);
+//编辑员工信息
+ void update(EmployeeDTO employeeDTO);
 }
