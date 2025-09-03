@@ -1,8 +1,0 @@
-xiliang:
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    host: localhost
-    port: 3306
-    database: workhouse_managementshu
-    username: root
-    password: zyx143322
