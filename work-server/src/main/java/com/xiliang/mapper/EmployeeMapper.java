@@ -16,4 +16,9 @@ public interface EmployeeMapper {
     void deleteById(Long id);
     //编辑员工信息
     void update(Employee employee);
+    //根据id查询员工信息
+    @Select("select * from workhouse_managementshu.employee where id = #{id}")
+    Employee getById(Long id);
+
+
 }

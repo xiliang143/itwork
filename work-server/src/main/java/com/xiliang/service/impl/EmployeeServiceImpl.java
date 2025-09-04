@@ -13,9 +13,11 @@ import com.xiliang.exception.PasswordErrorException;
 import com.xiliang.mapper.EmployeeMapper;
 import com.xiliang.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
@@ -80,13 +82,41 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void employeeDelete(Long id) {
         employeeMapper.deleteById(id);
     }
+    //根据id查询员工信息
+    public Employee getById(Long id) {
+        Employee employee = employeeMapper.getById(id);
+        //不暴露密码
+        employee.setPassword("*****");
+        return employee;
+
+    }
     //编辑员工信息
+    @Transactional(rollbackFor = Exception.class)
     public void update(EmployeeDTO employeeDTO) {
+        // 1. 查询数据库中的原始数据（使用专门的方法，避免密码被修改）
+        Employee existingEmployee = employeeMapper.getById(employeeDTO.getId());
+        // 2. 创建新的Employee对象用于更新
         Employee employee = new Employee();
-        //对象属性拷贝,把employeeDTO中的属性拷贝到employee中
+        // 3. 将原始数据拷贝到新对象中（保留所有原有字段）
+        BeanUtils.copyProperties(existingEmployee, employee);
+        // 4. 将DTO中的修改数据拷贝到新对象中（只更新有变化的字段）
         BeanUtils.copyProperties(employeeDTO, employee);
+        // 5. 设置更新时间和更新用户
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        // 6. 执行更新操作
+        employeeMapper.update(employee);
+    }
+    //启用禁用员工账号
+    public void startOrStop(Integer status, Long id) {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
         employee.setUpdateTime(LocalDateTime.now());
         employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
+
+
     }
 }
