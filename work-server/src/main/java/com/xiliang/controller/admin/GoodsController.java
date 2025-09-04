@@ -24,7 +24,6 @@ public class GoodsController {
     @Autowired
     private AliOssUtil aliOssUtil;
 
-
     //货物添加功能
     @PostMapping
     @ApiOperation("添加货物")
@@ -45,6 +44,15 @@ public class GoodsController {
             log.error("文件上传失败：{}", e);
             return Result.error("文件上传失败");
         }
+    }
+    //根据id查询货物功能
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询货物")
+    public Result<Goods> getGoods(@PathVariable long id) {
+        log.info("根据id查询货物：{}", id);
+        Goods goods=goodsService.getGoodsById(id);
+        return Result.success(goods);
+
     }
 
 }

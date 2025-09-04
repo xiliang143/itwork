@@ -24,6 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
 
+
     //货物添加功能
     public void addGoods(Goods goods) {
 
@@ -34,5 +35,15 @@ public class GoodsServiceImpl implements GoodsService {
         //添加货物名称
         goodsMapper.insert(goods);
 
+    }
+
+    //根据id查询货物功能
+    public Goods getGoodsById(long id) {
+        //判断如果id存在，则进行查询，不存在则返回null
+        Goods goods = goodsMapper.getById(id);
+        if (goods == null) {
+            return null;
+        }
+        return goods;
     }
 }
