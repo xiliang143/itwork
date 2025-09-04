@@ -46,4 +46,16 @@ public class GoodsServiceImpl implements GoodsService {
         }
         return goods;
     }
+
+    //根据id删除货物功能
+    public void deleteGoods(Integer id) {
+        //判断如果id存在，则进行删除，不存在则返回null
+        Goods goods = goodsMapper.getById(id);
+        if (goods == null) {
+            return;
+        }
+        goodsMapper.deleteById(id);
+
+
+    }
 }

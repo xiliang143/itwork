@@ -7,4 +7,6 @@ public interface GoodsService {
     void addGoods(Goods goods);
     //根据id查询货物功能
     Goods getGoodsById(long id);
+    //根据id删除货物功能
+    void deleteGoods(Integer id);
 }

@@ -52,7 +52,14 @@ public class GoodsController {
         log.info("根据id查询货物：{}", id);
         Goods goods=goodsService.getGoodsById(id);
         return Result.success(goods);
-
+    }
+   //根据id删除货物功能
+    @DeleteMapping
+    @ApiOperation("根据id删除货物")
+    public Result deleteGoods(Integer id) {
+        log.info("根据id删除货物：{}", id);
+        goodsService.deleteGoods(id);
+        return Result.success();
     }
 
 }

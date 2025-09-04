@@ -1,6 +1,7 @@
 package com.xiliang.mapper;
 
 import com.xiliang.entity.Goods;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -13,4 +14,6 @@ public interface GoodsMapper {
     void insert(Goods goods);
     @Select("select * from workhouse_managementshu.goods where id=#{id}")
     Goods getById(long id);
+    @Delete("delete from workhouse_managementshu.goods where id=#{id}")
+    void deleteById(Integer id);
 }
