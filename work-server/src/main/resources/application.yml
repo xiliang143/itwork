@@ -42,4 +42,9 @@ xiliang:
     admin-ttl: 72000000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+  alioss:
+    endpoint: ${xiliang.alioss.endpoint}
+    access-key-id: ${xiliang.alioss.access-key-id}
+    access-key-secret: ${xiliang.alioss.access-key-secret}
+    bucket-name: ${xiliang.alioss.bucket-name}
 

@@ -6,3 +6,8 @@ xiliang:
     database: workhouse_managementshu
     username: root
     password: zyx143322
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: ${OSS_ACCESS_KEY_ID}
+    access-key-secret: ${OSS_ACCESS_KEY_SECRET}
+    bucket-name: xiliang-work

@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface EmployeeMapper {
     //根据用户名查询员工
-    @Select("select * from workhouse_managementshu.employee where username = #{username}")
+    @Select("select * from workhouse_managementshu.employee where employee.username = #{username}")
     Employee getByUsername(String username);
     //新增员工
     void insert(Employee employee);

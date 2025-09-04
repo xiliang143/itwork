@@ -68,7 +68,7 @@ public class EmployeeController {
         return Result.success();
     }
     //删除员工
-    @DeleteMapping/*("/{id}")*/
+    @DeleteMapping
     @ApiOperation("删除员工")
     public Result<String> employeeDelete(Long id) {
         log.info("删除员工,{}", id);
