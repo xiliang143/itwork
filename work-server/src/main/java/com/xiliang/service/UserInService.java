@@ -13,5 +13,8 @@ public interface UserInService {
     //用户注册(新增用户)
     void register(User user);
 
-
+    //用户修改个人信息
+    void updateById(User user);
+    //用户根据id查询个人信息
+    User getById(Long id);
 }

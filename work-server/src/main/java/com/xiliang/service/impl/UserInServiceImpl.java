@@ -6,8 +6,10 @@ import com.xiliang.context.BaseContext;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.User;
 import com.xiliang.exception.AccountNotFoundException;
+import com.xiliang.exception.NoTheUserException;
 import com.xiliang.exception.PasswordErrorException;
 import com.xiliang.mapper.UserInMapper;
+import com.xiliang.result.Result;
 import com.xiliang.service.UserInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,26 @@ public class UserInServiceImpl implements UserInService {
         user.setUpdateTime(LocalDateTime.now());
         //插入数据
         userInMapper.insert(user);
+    }
+
+    //用户根据id查询个人信息
+    public User getById(Long id) {
+        User user = userInMapper.getById(id);
+        return user;
+    }
+
+    //用户修改个人信息
+    public void updateById(User user) {
+        //获取当前登录用户的id
+        Long userId = BaseContext.getCurrentId();
+        //如果用户id和当前登录用户的id不一致，抛出禁止修改异常
+        if(!user.getId().equals(userId)) {
+            throw new NoTheUserException(MessageConstant.NOT_THE_CURRENT_USER);
+        }
+        //如果是当前用户，则被允许修改
+        user.setUpdateTime(LocalDateTime.now());
+        userInMapper.updateById(user);
+
 
     }
 }

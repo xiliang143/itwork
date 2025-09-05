@@ -14,4 +14,8 @@ public interface UserInMapper {
     @Insert("insert into workhouse_managementshu.user (username, password, name, phone, sex, id_number, create_time, update_time) " +
             "values (#{username}, #{password}, #{name}, #{phone}, #{sex}, #{idNumber}, #{createTime}, #{updateTime})")
     void insert(User user);
+
+    void updateById(User user);
+    @Select("select * from workhouse_managementshu.user where id = #{id}")
+    User getById(Long id);
 }

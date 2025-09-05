@@ -11,12 +11,10 @@ import com.xiliang.utils.JwtUtil;
 import com.xiliang.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Info;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -68,6 +66,23 @@ public class UserInController {
     public Result register(@RequestBody User user){
         log.info("用户注册,{}",user);
         userInService.register(user);
+        return Result.success();
+    }
+    //用户查询个人信息
+    @GetMapping("/getById/{id}")
+    @ApiOperation("用户查询个人信息")
+    public Result<User> getById(@PathVariable Long id){
+        log.info("用户修改个人信息：{}",id);
+        User user=userInService.getById(id);
+        return Result.success(user);
+    }
+
+    //用户修改个人信息
+    @PostMapping("/update")
+    @ApiOperation("用户修改个人信息")
+    public Result update(@RequestBody User user){
+        log.info("用户修改个人信息,{}",user);
+        userInService.updateById(user);
         return Result.success();
     }
 
