@@ -1,6 +1,8 @@
 package com.xiliang.config;
 
 import com.xiliang.interceptor.JwtTokenAdminInterceptor;
+import com.xiliang.interceptor.JwtTokenUserInterceptor;
+import com.xiliang.json.JacksonObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -28,8 +30,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
-    /*@Autowired
-    private JwtTokenUserInterceptor jwtTokenUserInterceptor;*/
+    @Autowired
+    private JwtTokenUserInterceptor jwtTokenUserInterceptor;
 
     /**
      * 注册自定义拦截器
@@ -41,10 +43,10 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/admin/**")
                 .excludePathPatterns("/admin/employee/login");
-        /*registry.addInterceptor(jwtTokenUserInterceptor)
+        registry.addInterceptor(jwtTokenUserInterceptor)
                 .addPathPatterns("/user/**")
-                .excludePathPatterns("/user/user/login")
-                .excludePathPatterns("/user/shop/status");*/
+                .excludePathPatterns("/user/userin/login")
+                .excludePathPatterns("/user/workhouse/status");
     }
 
     /**
@@ -81,8 +83,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         //创建消息转换器对象
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();;
-        /*//为消息转换器设置一个对象转换器，对象转换器可以将java对象序列化为json数据
-        converter.setObjectMapper(new JacksonObjectMapper());*/
+        //为消息转换器设置一个对象转换器，对象转换器可以将java对象序列化为json数据
+        converter.setObjectMapper(new JacksonObjectMapper());
         //将上面的消息转换器对象追加到mvc框架的转换器集合中
         converters.add(0,converter);
     }

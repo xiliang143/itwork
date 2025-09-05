@@ -42,6 +42,10 @@ xiliang:
     admin-ttl: 72000000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    # 用户端用户生成jwt令牌相关配置
+    user-secret-key: user-itcast
+    user-ttl: 72000000000
+    user-token-name: user-token
   alioss:
     endpoint: ${xiliang.alioss.endpoint}
     access-key-id: ${xiliang.alioss.access-key-id}
