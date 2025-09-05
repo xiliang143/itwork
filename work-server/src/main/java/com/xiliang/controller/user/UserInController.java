@@ -14,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,7 @@ public class UserInController {
     //用户登陆界面
     @PostMapping("/login")
     @ApiOperation("用户登录")
-    public Result<UserLoginVO> userLogin(UserLoginDTO userLoginDTO) {
+    public Result<UserLoginVO> userLogin(@RequestBody UserLoginDTO userLoginDTO) {
         log.info("用户登录,{}", userLoginDTO);
 
         User user=userInService.userLogin(userLoginDTO);
@@ -62,6 +63,13 @@ public class UserInController {
         return Result.success();
     }
     //用户注册（新增用户）
+    @PostMapping("/register")
+    @ApiOperation("用户注册")
+    public Result register(@RequestBody User user){
+        log.info("用户注册,{}",user);
+        userInService.register(user);
+        return Result.success();
+    }
 
 
 }

@@ -1,6 +1,7 @@
 package com.xiliang.service.impl;
 
 import com.xiliang.constant.MessageConstant;
+import com.xiliang.constant.PasswordConstant;
 import com.xiliang.context.BaseContext;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.User;
@@ -10,6 +11,9 @@ import com.xiliang.mapper.UserInMapper;
 import com.xiliang.service.UserInService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 public class UserInServiceImpl implements UserInService {
@@ -29,6 +33,7 @@ public class UserInServiceImpl implements UserInService {
             throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
         }
         //密码比对
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
         if (!password.equals(user.getPassword())) {
             //密码错误
             throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
@@ -36,5 +41,14 @@ public class UserInServiceImpl implements UserInService {
         return user;
     }
     //用户注册（新增用户）
+    public void register(User user) {
+        //设置默认密码为123456
+        user.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
+        //设置创建时间和修改时间
+        user.setCreateTime(LocalDateTime.now());
+        user.setUpdateTime(LocalDateTime.now());
+        //插入数据
+        userInMapper.insert(user);
 
+    }
 }

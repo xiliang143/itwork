@@ -11,5 +11,7 @@ public interface UserInService {
      */
     User userLogin(UserLoginDTO userLoginDTO);
     //用户注册(新增用户)
+    void register(User user);
+
 
 }
