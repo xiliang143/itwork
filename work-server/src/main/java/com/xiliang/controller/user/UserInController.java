@@ -1,13 +1,16 @@
 package com.xiliang.controller.user;
 
 import com.xiliang.constant.JwtClaimsConstant;
+import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
+import com.xiliang.entity.Order;
 import com.xiliang.entity.User;
 import com.xiliang.json.JacksonObjectMapper;
 import com.xiliang.properties.Jwtproperties;
 import com.xiliang.result.Result;
 import com.xiliang.service.UserInService;
 import com.xiliang.utils.JwtUtil;
+import com.xiliang.vo.OrderVO;
 import com.xiliang.vo.UserLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -85,6 +88,14 @@ public class UserInController {
         userInService.updateById(user);
         return Result.success();
     }
+    /*//用户端发起订单请求并将订单响应给管理端
+
+    @PutMapping("/putOrder")
+    @ApiOperation("用户发起订单请求功能")
+    public Result<OrderVO> putOrder(@RequestBody OrderDTO orderDTO){
+        return null;
+    }*/
+
 
 
 
