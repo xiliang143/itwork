@@ -15,6 +15,12 @@ spring:
       url: jdbc:mysql://${xiliang.datasource.host}:${xiliang.datasource.port}/${xiliang.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${xiliang.datasource.username}
       password: ${xiliang.datasource.password}
+  redis:
+    host: ${xiliang.redis.host}
+    port: ${xiliang.redis.port}
+    database: ${xiliang.redis.database}
+    password: ${xiliang.redis.password}
+
 
 
 
