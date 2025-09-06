@@ -7,8 +7,9 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface OrderMapper {
-
     //订单分页查询
-
     Page<Order> pageQuery(OrderPageQueryDTO orderPageQueryDTO);
+
+    //新增订单
+    void insert(Order order);
 }

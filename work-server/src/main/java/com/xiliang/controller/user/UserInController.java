@@ -88,13 +88,16 @@ public class UserInController {
         userInService.updateById(user);
         return Result.success();
     }
-    /*//用户端发起订单请求并将订单响应给管理端
 
-    @PutMapping("/putOrder")
-    @ApiOperation("用户发起订单请求功能")
-    public Result<OrderVO> putOrder(@RequestBody OrderDTO orderDTO){
-        return null;
-    }*/
+    //用户提交订单
+    @PostMapping("/submit")
+    @ApiOperation("用户提交订单")
+    public Result submitOrder(@RequestBody OrderDTO orderDTO){
+        log.info("用户提交订单,{}",orderDTO);
+        userInService.submitOrder(orderDTO);
+        return Result.success();
+    }
+
 
 
 

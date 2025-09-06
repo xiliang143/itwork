@@ -1,26 +1,37 @@
 package com.xiliang.service.impl;
 
 import com.xiliang.constant.MessageConstant;
+import com.xiliang.constant.OrderPayStatusConstant;
 import com.xiliang.constant.PasswordConstant;
 import com.xiliang.context.BaseContext;
+import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
+import com.xiliang.entity.Order;
 import com.xiliang.entity.User;
 import com.xiliang.exception.AccountNotFoundException;
 import com.xiliang.exception.NoTheUserException;
 import com.xiliang.exception.PasswordErrorException;
+import com.xiliang.mapper.OrderMapper;
 import com.xiliang.mapper.UserInMapper;
 import com.xiliang.result.Result;
 import com.xiliang.service.UserInService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Service
 public class UserInServiceImpl implements UserInService {
     @Autowired
     private UserInMapper userInMapper;
+    @Autowired
+    private OrderMapper orderMapper;
 
 
     //用户登录
@@ -70,7 +81,26 @@ public class UserInServiceImpl implements UserInService {
         //如果是当前用户，则被允许修改
         user.setUpdateTime(LocalDateTime.now());
         userInMapper.updateById(user);
+    }
+    //用户提交订单
+    @Transactional(rollbackFor = Exception.class)
+    public void submitOrder(OrderDTO orderDTO) {
 
+        //获取当前用户
+        Long userId = BaseContext.getCurrentId();
+        User user = userInMapper.getById(userId);
+        //获取用户名
+        String username = user.getUsername();
+        //用uuid设置一个10位数的订单号
+        String orderId = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+        Order order = Order.builder()
+                .username(username)
+                .orderId(orderId)
+                .createTime(LocalDateTime.now())
+                .payStatus(OrderPayStatusConstant.NOT_PAY)
+                .build();
+        BeanUtils.copyProperties(orderDTO, order);
+        orderMapper.insert(order);
 
     }
 }

@@ -19,13 +19,13 @@ public class Order implements Serializable {
     //订单发起人
     private String username;
     //订单单号
-    private Long orderId;
+    private String orderId;
     //订单创建时间
     private LocalDateTime createTime;
     //订单支付状态
     private Integer payStatus;
     //订单货物种类
-    private String goodsType;
+    private Integer goodsType;
     //订单货物箱数
     private Integer goodsNum;
 

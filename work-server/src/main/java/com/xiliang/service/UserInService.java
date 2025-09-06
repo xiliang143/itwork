@@ -1,5 +1,6 @@
 package com.xiliang.service;
 
+import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.User;
 
@@ -17,4 +18,6 @@ public interface UserInService {
     void updateById(User user);
     //用户根据id查询个人信息
     User getById(Long id);
+    //用户提交订单
+    void submitOrder(OrderDTO orderDTO);
 }

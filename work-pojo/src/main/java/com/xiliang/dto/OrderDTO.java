@@ -11,9 +11,7 @@ import java.io.Serializable;
 public class OrderDTO implements Serializable {
 
 
-    private String username;
-
-    private String goodsName;
+    private Integer goodsType;
 
     private Integer goodsNum;
 }
