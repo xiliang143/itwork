@@ -9,10 +9,10 @@ public class GoodsConstant {
     public static final double GLASS_DAY_PRICE = 180.00;
     //化工用品存储天数单价
     public static final double CHEMICAL_DAY_PRICE = 300.00;
-    //入库单价
-    public static final double INPRICE = 2000.00;
+    //每箱入库单价
+    public static final double INPRICE = 25.00;
     //出库单价
-    public static final double OUTPRICE = 2000.00;
+    public static final double OUTPRICE = 30.00;
 
 
 }

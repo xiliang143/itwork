@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -50,12 +51,12 @@ public class OrderController {
         return Result.success(order);
     }
 
-    /*//接单计算入库价格并打印报表
+    //接单计算入库价格并打印报表
     @GetMapping("/export")
     @ApiOperation("打印入库报表")
-    public void export(HttpServletResponse response){
-        orderService.exportInData(response);
-    }*/
+    public void export(HttpServletResponse response, long id) throws IOException {
+        orderService.exportInData(response,id);
+    }
 
 
 
