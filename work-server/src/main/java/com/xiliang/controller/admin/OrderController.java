@@ -13,6 +13,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -40,6 +41,23 @@ public class OrderController {
         orderService.deleteOrder(id);
         return Result.success();
     }
+    //根据id查询订单
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询订单")
+    public Result<Order> getById(@PathVariable long id){
+        log.info("根据id查询订单：{}",id);
+        Order order = orderService.getById(id);
+        return Result.success(order);
+    }
+
+    /*//接单计算入库价格并打印报表
+    @GetMapping("/export")
+    @ApiOperation("打印入库报表")
+    public void export(HttpServletResponse response){
+        orderService.exportInData(response);
+    }*/
+
+
 
 
 

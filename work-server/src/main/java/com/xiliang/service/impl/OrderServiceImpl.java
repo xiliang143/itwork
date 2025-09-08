@@ -11,8 +11,10 @@ import com.xiliang.result.PageResult;
 import com.xiliang.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletResponse;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -38,4 +40,25 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrder(long id) {
         orderMapper.deleteOrder(id);
     }
+    //根据id查询订单
+    public Order getById(long id) {
+        //如果id在数据库表中不存在，则抛出异常
+        if (orderMapper.getById(id)==null){
+            throw new RuntimeException("订单不存在");
+        }
+        Order order=orderMapper.getById(id);
+        return order;
+
+    }
+    /*//打印入库报表
+    public void exportInData(HttpServletResponse response) {
+        //查询数据库，获取数据
+
+        //将查询到的数据，写入excel文件中
+
+        //通过输出流，将excel下载到客户端浏览器
+
+
+
+    }*/
 }

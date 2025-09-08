@@ -15,6 +15,7 @@ public class MessageConstant {
     public static final String UPLOAD_FAILED = "文件上传失败";
     public static final String PASSWORD_EDIT_FAILED = "密码修改失败";
     public static final String NOT_THE_CURRENT_USER = "不是当前用户";
+    public static final String NO_ORDER_DATA = "无订单数据";
 
 
 
