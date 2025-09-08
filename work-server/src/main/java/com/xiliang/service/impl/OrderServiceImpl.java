@@ -34,5 +34,8 @@ public class OrderServiceImpl implements OrderService {
         return new PageResult(total,records);
 
     }
-
+    //根据id删除订单
+    public void deleteOrder(long id) {
+        orderMapper.deleteOrder(id);
+    }
 }

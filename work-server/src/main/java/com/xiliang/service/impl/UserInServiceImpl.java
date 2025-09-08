@@ -97,7 +97,7 @@ public class UserInServiceImpl implements UserInService {
                 .username(username)
                 .orderId(orderId)
                 .createTime(LocalDateTime.now())
-                .payStatus(OrderPayStatusConstant.NOT_PAY)
+                .payStatus(OrderPayStatusConstant.ALLREADY_PAY)
                 .build();
         BeanUtils.copyProperties(orderDTO, order);
         orderMapper.insert(order);

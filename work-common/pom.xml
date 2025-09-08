@@ -47,15 +47,7 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
         </dependency>
-        <!--微信支付-->
-        <dependency>
-            <groupId>com.github.wechatpay-apiv3</groupId>
-            <artifactId>wechatpay-apache-httpclient</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.github.wechatpay-apiv3</groupId>
-            <artifactId>wechatpay-apache-httpclient</artifactId>
-        </dependency>
+
         <!-- 添加javax.activation依赖，解决JJWT 0.9.1在Java 9+中的兼容性问题 -->
         <dependency>
             <groupId>javax.activation</groupId>
