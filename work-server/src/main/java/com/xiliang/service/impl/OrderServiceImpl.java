@@ -3,6 +3,8 @@ package com.xiliang.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiliang.constant.GoodsConstant;
+import com.xiliang.constant.MessageConstant;
+import com.xiliang.constant.OrderPayStatusConstant;
 import com.xiliang.context.BaseContext;
 import com.xiliang.controller.admin.OrderController;
 import com.xiliang.dto.OrderPageQueryDTO;
@@ -108,8 +110,10 @@ public class OrderServiceImpl implements OrderService {
         String localFilePath = localDirPath + File.separator + fileName;
         FileOutputStream localOut = new FileOutputStream(localFilePath);
         excel.write(localOut);
+        //将支付状态设置为已支付
+        order.setPayStatus(OrderPayStatusConstant.ALLREADY_PAY);
 
-
+        orderMapper.update(order.getPayStatus(),id);
         //关闭资源
         localOut.close();
         out.close();

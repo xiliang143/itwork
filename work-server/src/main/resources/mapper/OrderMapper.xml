@@ -15,5 +15,12 @@
         (username, order_id, create_time, pay_status, goods_type, goods_num) values
         (#{username}, #{orderId}, #{createTime}, #{payStatus}, #{goodsType}, #{goodsNum})
     </insert>
+    <update id="update">
+        update workhouse_managementshu.`order`
+        <set>
+            <if test="payStatus!=null">pay_status=#{payStatus}</if>
+        </set>
+        where id=#{id}
+    </update>
 
 </mapper>

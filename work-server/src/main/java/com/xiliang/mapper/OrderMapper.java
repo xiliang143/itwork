@@ -6,6 +6,7 @@ import com.xiliang.entity.Order;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface OrderMapper {
@@ -19,4 +20,7 @@ public interface OrderMapper {
     //根据id查询订单
     @Select("select * from workhouse_managementshu.order where id=#{id}")
     Order getById(long id);
+    //更新支付状态
+    void update(Integer payStatus,Long id);
+
 }
