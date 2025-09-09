@@ -22,5 +22,7 @@ public interface OrderMapper {
     Order getById(long id);
     //更新支付状态
     void update(Integer payStatus,Long id);
-
+    //根据id删除订单
+    @Delete("delete from workhouse_managementshu.order where id=#{id}")
+    void deleteById(Integer id);
 }

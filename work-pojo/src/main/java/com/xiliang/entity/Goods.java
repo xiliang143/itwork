@@ -15,18 +15,18 @@ public class Goods implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
-
-    private String goodsName;
-    //存入时间
-    private LocalDateTime CreateTime;
-    //存入人员
-    private Long CreateUser;
-    //更新时间
-    private LocalDateTime UpdateTime;
-    //更新人员
-    private Long UpdateUser;
+    //货物归属人
+    private String username;
+    //货物订单号
+    private String orderId;
+    //货物存入时间
+    private LocalDateTime createTime;
+    //货物种类
+    private Integer goodsType;
+    //货物箱数
+    private Integer goodsNum;
     //货物图片
-    private String Img;
+    private String img;
 
 
 }

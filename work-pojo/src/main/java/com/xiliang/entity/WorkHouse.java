@@ -27,5 +27,5 @@ public class WorkHouse implements Serializable {
     //货物箱数
     private Integer goodsNum;
     //货物图片
-    private String img;
+    private String Img;
 }

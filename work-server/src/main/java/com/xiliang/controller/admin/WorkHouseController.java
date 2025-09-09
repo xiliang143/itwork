@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Slf4j
-@Api(tags = "仓库管理模块")
+@Api(tags = "仓库状态管理模块")
 @RequestMapping("/admin/workHouse")
 public class WorkHouseController {
     @Autowired

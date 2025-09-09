@@ -2,7 +2,7 @@ package com.xiliang.controller.admin;
 
 import com.xiliang.entity.Goods;
 import com.xiliang.result.Result;
-import com.xiliang.service.GoodsService;
+import com.xiliang.service.WorkhousringService;
 import com.xiliang.utils.AliOssUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -14,16 +14,18 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.UUID;
 
+@RequestMapping("/admin/workhousing")
 @RestController
 @Slf4j
-@RequestMapping("/admin/goods")
-@Api(tags = "货物管理")
-public class GoodsController {
-    @Autowired
-    private GoodsService goodsService;
+@Api(tags = "仓库管理模块")
+public class WorkhousringController {
     @Autowired
     private AliOssUtil aliOssUtil;
+    @Autowired
+    private WorkhousringService workhousringService;
 
+
+    //向仓库添加货物
     //货物添加功能
     @PostMapping
     @ApiOperation("添加货物")
@@ -38,28 +40,16 @@ public class GoodsController {
 
             // 设置图片路径到商品对象
             goods.setImg(filePath);
-            goodsService.addGoods(goods);
+            workhousringService.addGoods(goods);
             return Result.success();
         } catch (IOException e) {
             log.error("文件上传失败：{}", e);
             return Result.error("文件上传失败");
         }
     }
-    //根据id查询货物功能
-    @GetMapping("/{id}")
-    @ApiOperation("根据id查询货物")
-    public Result<Goods> getGoods(@PathVariable long id) {
-        log.info("根据id查询货物：{}", id);
-        Goods goods=goodsService.getGoodsById(id);
-        return Result.success(goods);
-    }
-   //根据id删除货物功能
-    @DeleteMapping
-    @ApiOperation("根据id删除货物")
-    public Result deleteGoods(Integer id) {
-        log.info("根据id删除货物：{}", id);
-        goodsService.deleteGoods(id);
-        return Result.success();
-    }
+
+// ... existing code ...
+
+
 
 }
