@@ -19,8 +19,10 @@ public interface UserInAndOutService {
     void updateById(User user);
     //用户根据id查询个人信息
     User getById(Long id);
-    //用户提交订单
+    //用户入库提交订单
     void submitOrder(OrderDTO orderDTO);
     //根据订单单号查询仓库中的订单
     Goods getByOrderId(String orderId);
+    //用户提交出库订单
+    void submitOutOrder(String orderId);
 }

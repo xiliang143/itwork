@@ -5,6 +5,7 @@ import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.Goods;
 import com.xiliang.entity.User;
+import com.xiliang.mapper.UserInAndOutMapper;
 import com.xiliang.properties.Jwtproperties;
 import com.xiliang.result.Result;
 import com.xiliang.service.UserInAndOutService;
@@ -28,6 +29,8 @@ public class UserInAndOutController {
     private UserInAndOutService userInAndOutService;
     @Autowired
     private Jwtproperties jwtproperties;
+    @Autowired
+    private UserInAndOutMapper userInAndOutMapper;
 
 
     //用户登陆界面
@@ -86,9 +89,9 @@ public class UserInAndOutController {
         return Result.success();
     }
 
-    //用户提交订单
+    //用户提交入库订单
     @PostMapping("/submit")
-    @ApiOperation("用户提交订单")
+    @ApiOperation("用户提交入库订单")
     public Result submitOrder(@RequestBody OrderDTO orderDTO){
         log.info("用户提交订单,{}",orderDTO);
         userInAndOutService.submitOrder(orderDTO);
@@ -101,6 +104,14 @@ public class UserInAndOutController {
         log.info("根据订单单号查询仓库中的订单：{}", orderId);
         Goods goods=userInAndOutService.getByOrderId(orderId);
         return Result.success(goods);
+    }
+    //用户提交出库订单
+    @PostMapping("/submitOut")
+    @ApiOperation("用户提交出库订单")
+    public Result submitOutOrder(String orderId) {
+        log.info("用户提交出库订单{}", orderId);
+        userInAndOutService.submitOutOrder(orderId);
+        return Result.success();
     }
 
 

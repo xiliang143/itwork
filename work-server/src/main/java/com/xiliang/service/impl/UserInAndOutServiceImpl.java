@@ -8,11 +8,13 @@ import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.Goods;
 import com.xiliang.entity.Order;
+import com.xiliang.entity.OrderOut;
 import com.xiliang.entity.User;
 import com.xiliang.exception.AccountNotFoundException;
 import com.xiliang.exception.NoTheUserException;
 import com.xiliang.exception.PasswordErrorException;
 import com.xiliang.mapper.OrderInMapper;
+import com.xiliang.mapper.OrderOutMapper;
 import com.xiliang.mapper.UserInAndOutMapper;
 import com.xiliang.service.UserInAndOutService;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +32,8 @@ public class UserInAndOutServiceImpl implements UserInAndOutService {
     private UserInAndOutMapper userInAndOutMapper;
     @Autowired
     private OrderInMapper orderMapper;
+    @Autowired
+    private OrderOutMapper orderOutMapper;
 
 
     //用户登录
@@ -105,5 +109,22 @@ public class UserInAndOutServiceImpl implements UserInAndOutService {
     public Goods getByOrderId(String orderId) {
         Goods goods=userInAndOutMapper.getByOrderId(orderId);
         return goods;
+    }
+    //用户提交出库订单
+    public void submitOutOrder(String orderId) {
+        Goods goods = userInAndOutMapper.getByOrderId(orderId);
+        //用uuid设置一个10位数的订单号
+        String orderOutId = UUID.randomUUID().toString().replace("-", "").substring(0, 10);
+        OrderOut orderOut = OrderOut.builder()
+                .username(goods.getUsername())
+                .orderId(orderOutId)
+                .createTime(LocalDateTime.now())
+                .payStatus(OrderPayStatusConstant.NOT_PAY)
+                .goodsType(goods.getGoodsType())
+                .goodsNum(goods.getGoodsNum())
+                .build();
+        orderOutMapper.insert(orderOut);
+
+
     }
 }

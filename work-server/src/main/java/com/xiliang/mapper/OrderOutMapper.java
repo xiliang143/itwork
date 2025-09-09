@@ -10,4 +10,6 @@ import org.apache.ibatis.annotations.Select;
 public interface OrderOutMapper {
     //订单分页查询
      Page<OrderOut> pageQuery(OrderPageQueryDTO orderPageQueryDTO);
+    //新增出库订单
+    void insert(OrderOut orderOut);
 }
