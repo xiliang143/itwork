@@ -3,9 +3,8 @@ package com.xiliang.service.impl;
 import com.xiliang.constant.OrderPayStatusConstant;
 import com.xiliang.entity.Goods;
 import com.xiliang.entity.Order;
-import com.xiliang.exception.BaseException;
 import com.xiliang.exception.PayStatusException;
-import com.xiliang.mapper.OrderMapper;
+import com.xiliang.mapper.OrderInMapper;
 import com.xiliang.mapper.WorkhousringMapper;
 import com.xiliang.service.WorkhousringService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import java.time.LocalDateTime;
 @Service
 public class WorkhousringServiceImpl implements WorkhousringService {
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderInMapper orderMapper;
     @Autowired
     private WorkhousringMapper workhousringMapper;
 

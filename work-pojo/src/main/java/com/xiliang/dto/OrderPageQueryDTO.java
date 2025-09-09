@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class OrderPageQueryDTO implements Serializable {
 
-    private Long orderId;
+    private String orderId;
 
     //页码
     private int page;
