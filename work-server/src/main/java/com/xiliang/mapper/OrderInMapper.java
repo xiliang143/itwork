@@ -6,10 +6,9 @@ import com.xiliang.entity.Order;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 @Mapper
-public interface OrderMapper {
+public interface OrderInMapper {
     //订单分页查询
     Page<Order> pageQuery(OrderPageQueryDTO orderPageQueryDTO);
 

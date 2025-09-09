@@ -2,28 +2,25 @@ package com.xiliang.controller.admin;
 
 import com.xiliang.dto.OrderPageQueryDTO;
 import com.xiliang.entity.Order;
-import com.xiliang.entity.User;
 import com.xiliang.result.PageResult;
 import com.xiliang.result.Result;
-import com.xiliang.service.OrderService;
+import com.xiliang.service.OrderInService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @RestController
-@RequestMapping("/admin/order")
+@RequestMapping("/admin/orderin")
 @Slf4j
-@Api(tags = "管理端管理订单功能模块")
-public class OrderController {
+@Api(tags = "管理端管理入库订单功能模块")
+public class OrderInController {
     @Autowired
-    private OrderService orderService;
+    private OrderInService orderService;
 
 
     //订单分页查询模块

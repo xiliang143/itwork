@@ -3,24 +3,16 @@ package com.xiliang.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xiliang.constant.GoodsConstant;
-import com.xiliang.constant.MessageConstant;
 import com.xiliang.constant.OrderPayStatusConstant;
-import com.xiliang.context.BaseContext;
-import com.xiliang.controller.admin.OrderController;
 import com.xiliang.dto.OrderPageQueryDTO;
-import com.xiliang.entity.Employee;
 import com.xiliang.entity.Order;
-import com.xiliang.mapper.OrderMapper;
+import com.xiliang.mapper.OrderInMapper;
 import com.xiliang.result.PageResult;
-import com.xiliang.result.Result;
-import com.xiliang.service.OrderService;
+import com.xiliang.service.OrderInService;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.ibatis.annotations.Case;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.ServletOutputStream;
@@ -32,9 +24,9 @@ import java.util.List;
 
 @Service
 @Slf4j
-public class OrderServiceImpl implements OrderService {
+public class OrderInServiceImpl implements OrderInService {
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderInMapper orderMapper;
 
 
 
