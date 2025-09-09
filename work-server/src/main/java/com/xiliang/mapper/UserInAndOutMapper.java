@@ -1,5 +1,6 @@
 package com.xiliang.mapper;
 
+import com.xiliang.entity.Goods;
 import com.xiliang.entity.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -18,4 +19,7 @@ public interface UserInAndOutMapper {
     void updateById(User user);
     @Select("select * from workhouse_managementshu.user where id = #{id}")
     User getById(Long id);
+    //根据出库订单单号查询仓库中的订单
+    @Select("select * from workhouse_managementshu.workhouse where order_id=#{orderId};")
+    Goods getByOrderId(String orderId);
 }

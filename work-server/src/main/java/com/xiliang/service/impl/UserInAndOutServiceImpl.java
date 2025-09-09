@@ -6,6 +6,7 @@ import com.xiliang.constant.PasswordConstant;
 import com.xiliang.context.BaseContext;
 import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
+import com.xiliang.entity.Goods;
 import com.xiliang.entity.Order;
 import com.xiliang.entity.User;
 import com.xiliang.exception.AccountNotFoundException;
@@ -99,5 +100,10 @@ public class UserInAndOutServiceImpl implements UserInAndOutService {
         BeanUtils.copyProperties(orderDTO, order);
         orderMapper.insert(order);
 
+    }
+    //根据出库订单单号查询仓库中的订单
+    public Goods getByOrderId(String orderId) {
+        Goods goods=userInAndOutMapper.getByOrderId(orderId);
+        return goods;
     }
 }

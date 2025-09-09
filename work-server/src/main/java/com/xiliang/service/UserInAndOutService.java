@@ -2,6 +2,7 @@ package com.xiliang.service;
 
 import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
+import com.xiliang.entity.Goods;
 import com.xiliang.entity.User;
 
 public interface UserInAndOutService {
@@ -20,4 +21,6 @@ public interface UserInAndOutService {
     User getById(Long id);
     //用户提交订单
     void submitOrder(OrderDTO orderDTO);
+    //根据订单单号查询仓库中的订单
+    Goods getByOrderId(String orderId);
 }

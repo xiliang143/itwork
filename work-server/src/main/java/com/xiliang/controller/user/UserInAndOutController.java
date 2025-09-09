@@ -3,6 +3,7 @@ package com.xiliang.controller.user;
 import com.xiliang.constant.JwtClaimsConstant;
 import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
+import com.xiliang.entity.Goods;
 import com.xiliang.entity.User;
 import com.xiliang.properties.Jwtproperties;
 import com.xiliang.result.Result;
@@ -92,6 +93,14 @@ public class UserInAndOutController {
         log.info("用户提交订单,{}",orderDTO);
         userInAndOutService.submitOrder(orderDTO);
         return Result.success();
+    }
+    //根据订单单号查询仓库中的订单
+    @GetMapping("/getByOrderId")
+    @ApiOperation(value = "根据出库订单单号查询仓库中的订单")
+    public Result<Goods> getByOrderId(String orderId) {
+        log.info("根据订单单号查询仓库中的订单：{}", orderId);
+        Goods goods=userInAndOutService.getByOrderId(orderId);
+        return Result.success(goods);
     }
 
 
