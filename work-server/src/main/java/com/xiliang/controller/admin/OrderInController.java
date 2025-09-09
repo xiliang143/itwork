@@ -48,7 +48,7 @@ public class OrderInController {
         return Result.success(order);
     }
 
-    //接单计算入库价格并打印报表
+    //接入库单计算入库价格并打印报表
     @GetMapping("/export")
     @ApiOperation("打印入库报表")
     public void export(HttpServletResponse response, Long id) throws IOException {

@@ -11,7 +11,7 @@ public class GoodsConstant {
     public static final double CHEMICAL_DAY_PRICE = 300.00;
     //每箱入库单价
     public static final double INPRICE = 25.00;
-    //出库单价
+    //每箱出库单价
     public static final double OUTPRICE = 30.00;
 
 

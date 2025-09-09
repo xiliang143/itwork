@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+
 @RestController
 @RequestMapping("/admin/orderout")
 @Slf4j
@@ -29,5 +32,11 @@ public class OrderOutController {
         log.info("订单分页查询:{}", orderPageQueryDTO);
         PageResult pageResult = orderOutService.pageQuery(orderPageQueryDTO);
         return Result.success(pageResult);
+    }
+    //接出库单计算出库价格打印报表
+    @GetMapping("/export")
+    @ApiOperation("打印出库报表")
+    public void export(HttpServletResponse response, Long id) throws IOException {
+        orderOutService.exportOutData(response,id);
     }
 }
