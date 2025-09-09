@@ -4,7 +4,7 @@ import com.xiliang.dto.OrderDTO;
 import com.xiliang.dto.UserLoginDTO;
 import com.xiliang.entity.User;
 
-public interface UserInService {
+public interface UserInAndOutService {
     /**
      * 用户登录
      * @param userLoginDTO

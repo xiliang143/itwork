@@ -11,14 +11,11 @@ import com.xiliang.entity.User;
 import com.xiliang.exception.AccountNotFoundException;
 import com.xiliang.exception.NoTheUserException;
 import com.xiliang.exception.PasswordErrorException;
-import com.xiliang.mapper.OrderMapper;
-import com.xiliang.mapper.UserInMapper;
-import com.xiliang.result.Result;
-import com.xiliang.service.UserInService;
+import com.xiliang.mapper.OrderInMapper;
+import com.xiliang.mapper.UserInAndOutMapper;
+import com.xiliang.service.UserInAndOutService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.redis.connection.SortParameters;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
@@ -27,11 +24,11 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
-public class UserInServiceImpl implements UserInService {
+public class UserInAndOutServiceImpl implements UserInAndOutService {
     @Autowired
-    private UserInMapper userInMapper;
+    private UserInAndOutMapper userInAndOutMapper;
     @Autowired
-    private OrderMapper orderMapper;
+    private OrderInMapper orderMapper;
 
 
     //用户登录
@@ -39,7 +36,7 @@ public class UserInServiceImpl implements UserInService {
         String username = userLoginDTO.getUsername();
         String password = userLoginDTO.getPassword();
         //1、根据用户名查询数据库中的数据
-        User user = userInMapper.getByUsername(username);
+        User user = userInAndOutMapper.getByUsername(username);
         //2、处理各种异常情况（用户名不存在、密码不对、账号被锁定）
         if (user == null) {
             //账号不存在
@@ -61,12 +58,12 @@ public class UserInServiceImpl implements UserInService {
         user.setCreateTime(LocalDateTime.now());
         user.setUpdateTime(LocalDateTime.now());
         //插入数据
-        userInMapper.insert(user);
+        userInAndOutMapper.insert(user);
     }
 
     //用户根据id查询个人信息
     public User getById(Long id) {
-        User user = userInMapper.getById(id);
+        User user = userInAndOutMapper.getById(id);
         return user;
     }
 
@@ -80,7 +77,7 @@ public class UserInServiceImpl implements UserInService {
         }
         //如果是当前用户，则被允许修改
         user.setUpdateTime(LocalDateTime.now());
-        userInMapper.updateById(user);
+        userInAndOutMapper.updateById(user);
     }
     //用户提交订单
     @Transactional(rollbackFor = Exception.class)
@@ -88,7 +85,7 @@ public class UserInServiceImpl implements UserInService {
 
         //获取当前用户
         Long userId = BaseContext.getCurrentId();
-        User user = userInMapper.getById(userId);
+        User user = userInAndOutMapper.getById(userId);
         //获取用户名
         String username = user.getUsername();
         //用uuid设置一个10位数的订单号
