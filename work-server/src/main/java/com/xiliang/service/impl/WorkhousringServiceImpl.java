@@ -18,8 +18,6 @@ public class WorkhousringServiceImpl implements WorkhousringService {
     private OrderInMapper orderMapper;
     @Autowired
     private WorkhousringMapper workhousringMapper;
-
-
     //向仓库添加货物
     public void addGoods(Goods goods) {
         //查询订单表，并将订单表中的数据存入仓库表中
@@ -47,10 +45,9 @@ public class WorkhousringServiceImpl implements WorkhousringService {
             throw new PayStatusException(OrderPayStatusConstant.NOT_PAY);
         }
 
-
-
-
-
-
+    }
+    //根据入库订单号删除货物中的订单
+    public void deleteByOrderId(String orderId) {
+        workhousringMapper.deleteByOrderId(orderId);
     }
 }

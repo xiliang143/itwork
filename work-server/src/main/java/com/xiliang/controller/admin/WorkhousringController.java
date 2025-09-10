@@ -7,6 +7,7 @@ import com.xiliang.utils.AliOssUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,6 +47,14 @@ public class WorkhousringController {
             log.error("文件上传失败：{}", e);
             return Result.error("文件上传失败");
         }
+    }
+    //根据入库订单号删除货物中的订单
+    @DeleteMapping
+    @ApiOperation("根据入库订单号删除货物中的订单")
+    public Result deleteByOrderId( String orderId) {
+        log.info("根据入库订单号删除货物中的订单：{}", orderId);
+        workhousringService.deleteByOrderId(orderId);
+        return Result.success();
     }
 
 
